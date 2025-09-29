@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizz de la promo sans nom</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        td {
+            padding: 18px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.01);
+        }
+
+        .numero {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1em;
+            width: 60px;
+        }
+
+        .titre-lien {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1.05em;
+        }
+
+        .description {
+            color: #718096;
+            font-size: 0.95em;
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Quiz de la promo sans Nom</h1>
+            <p class="subtitle">Vous trouverez ici tout les quiz éxistant "Bon courage"</p>
+        </header>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">🔤 Ressources Trigrammes</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Lien</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="numero">1</td>
+                            <td class="titre-lien">0-30 trigrammes</td>
+                            <td class="description">Collection des trigrammes de 0 à 30</td>
+                            <td><a href="https://dj383210.github.io/Tri1/" class="link-button">Accéder</a></td>
+                        </tr>
+                        <tr>
+                            <td class="numero">2</td>
+                            <td class="titre-lien">30-60 trigrammes</td>
+                            <td class="description">Collection des trigrammes de 30 à 60</td>
+                            <td><a href="https://dj383210.github.io/Tri2/" class="link-button">Accéder</a></td>
+                        </tr>
+                        <tr>
+                            <td class="numero">3</td>
+                            <td class="titre-lien">60-90 trigrammes</td>
+                            <td class="description">Collection des trigrammes de 60 à 90</td>
+                            <td><a href="https://dj383210.github.io/Tri3/" class="link-button">Accéder</a></td>
+                        </tr>
+                        <tr>
+                            <td class="numero">4</td>
+                            <td class="titre-lien">90-119 trigrammes</td>
+                            <td class="description">Collection des trigrammes de 90 à 119</td>
+                            <td><a href="https://dj383210.github.io/Tri4/" class="link-button">Accéder</a></td>
+                        </tr>
+                        <tr>
+                            <td class="numero">5</td>
+                            <td class="titre-lien">119-150 trigrammes</td>
+                            <td class="description">Collection des trigrammes de 119 à 150</td>
+                            <td><a href="https://dj383210.github.io/Tri5/" class="link-button">Accéder</a></td>
+                        </tr>
+                        <tr>
+                            <td class="numero">6</td>
+                            <td class="titre-lien">0-60 trigrammes</td>
+                            <td class="description">Collection complète des trigrammes de 0 à 60</td>
+                            <td><a href="https://dj383210.github.io/Tri1-2/" class="link-button">Accéder</a></td>
+                        </tr>
+                        <tr>
+                            <td class="numero">7</td>
+                            <td class="titre-lien">60-120 trigrammes</td>
+                            <td class="description">Collection complète des trigrammes de 60 à 120</td>
+                            <td><a href="https://dj383210.github.io/Tri3-4/" class="link-button">Accéder</a></td>
+                        </tr>
+                        <tr>
+                            <td class="numero">8</td>
+                            <td class="titre-lien">90-150 trigrammes</td>
+                            <td class="description">Collection complète des trigrammes de 90 à 150</td>
+                            <td><a href="https://dj383210.github.io/Tri4-5/" class="link-button">Accéder</a></td>
+                        </tr>
+                        <tr>
+                            <td class="numero">9</td>
+                            <td class="titre-lien">150 trigrammes</td>
+                            <td class="description">Collection complète de tous les 150 trigrammes</td>
+                            <td><a href="https://dj383210.github.io/TriALL/" class="link-button">Accéder</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🏥 Ressources Médicales</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Lien</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="numero">10</td>
+                            <td class="titre-lien">Paramètres Vitaux</td>
+                            <td class="description">Guide et quiz sur les paramètres vitaux</td>
+                            <td><a href="https://dj383210.github.io/Quiz-PV/" class="link-button">Accéder</a></td>
+                        </tr>
+                        <tr>
+                            <td class="numero">11</td>
+                            <td class="titre-lien">Anatomie Générale</td>
+                            <td class="description">Ressources complètes sur l'anatomie générale</td>
+                            <td><a href="https://dj383210.github.io/Quiz-anatomie/" class="link-button">Accéder</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 - Index des ressources hébergées sur GitHub Pages</p>
+        </footer>
+    </div>
+</body>
+</html>
