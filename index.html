@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -11,255 +12,283 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
+```
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 40px 20px;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    }
 
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
+    header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+    }
 
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .subtitle {
+        font-size: 1.1em;
+        opacity: 0.9;
+    }
+
+    .content {
+        padding: 40px;
+    }
+
+    .section {
+        margin-bottom: 40px;
+    }
+
+    .section-title {
+        font-size: 1.8em;
+        color: #667eea;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #667eea;
+    }
+
+    .trigramme-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .trigramme-card {
+        background: white;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 15px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .trigramme-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        border-color: #667eea;
+    }
+
+    .trigramme-card.orange {
+        border-color: #ea580c;
+    }
+
+    .trigramme-card.orange:hover {
+        border-color: #ea580c;
+        box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2);
+    }
+
+    .trigramme-card.hard {
+        border-color: #dc2626;
+    }
+
+    .trigramme-card.hard:hover {
+        border-color: #dc2626;
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+    }
+
+    .trigramme-card.pink {
+        border-color: #ec4899;
+    }
+
+    .trigramme-card.pink:hover {
+        border-color: #ec4899;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
+    }
+
+    .card-title {
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 1.05em;
+        margin-bottom: 8px;
+    }
+
+    .card-title.red {
+        color: #dc2626;
+    }
+
+    .card-title.pink {
+        color: #ec4899;
+    }
+
+    .card-description {
+        color: #718096;
+        font-size: 0.9em;
+        margin-bottom: 12px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    th {
+        padding: 18px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 1.1em;
+    }
+
+    td {
+        padding: 18px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    tbody tr {
+        transition: all 0.3s ease;
+    }
+
+    tbody tr:hover {
+        background-color: #f8f9fa;
+        transform: scale(1.01);
+    }
+
+    .numero {
+        font-weight: bold;
+        color: #667eea;
+        font-size: 1.1em;
+        width: 60px;
+    }
+
+    .titre-lien {
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 1.05em;
+    }
+
+    .titre-lien.red {
+        color: #dc2626;
+    }
+
+    .titre-lien.orange {
+        color: #ea580c;
+    }
+
+    .titre-lien.pink {
+        color: #ec4899;
+    }
+
+    .description {
+        color: #718096;
+        font-size: 0.95em;
+    }
+
+    a {
+        color: #667eea;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #764ba2;
+        text-decoration: underline;
+    }
+
+    .link-button {
+        display: inline-block;
+        padding: 8px 16px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        width: 100%;
+        text-align: center;
+    }
+
+    .link-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        text-decoration: none;
+    }
+
+    .link-button.red {
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    }
+
+    .link-button.red:hover {
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+    }
+
+    .link-button.orange {
+        background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    }
+
+    .link-button.orange:hover {
+        box-shadow: 0 4px 12px rgba(234, 88, 12, 0.4);
+    }
+
+    .link-button.pink {
+        background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+    }
+
+    .link-button.pink:hover {
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4);
+    }
+
+    footer {
+        background: #f8f9fa;
+        padding: 20px;
+        text-align: center;
+        color: #718096;
+        font-size: 0.9em;
+    }
+
+    @media (max-width: 768px) {
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .subtitle {
-            font-size: 1.1em;
-            opacity: 0.9;
+            font-size: 2em;
         }
 
         .content {
-            padding: 40px;
-        }
-
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section-title {
-            font-size: 1.8em;
-            color: #667eea;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
+            padding: 20px;
         }
 
         .trigramme-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .trigramme-card {
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            padding: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .trigramme-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
-            border-color: #667eea;
-        }
-
-        .trigramme-card.orange {
-            border-color: #ea580c;
-        }
-
-        .trigramme-card.orange:hover {
-            border-color: #ea580c;
-            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2);
-        }
-
-        .trigramme-card.hard {
-            border-color: #dc2626;
-        }
-
-        .trigramme-card.hard:hover {
-            border-color: #dc2626;
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
-        }
-
-        .card-title {
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 1.05em;
-            margin-bottom: 8px;
-        }
-
-        .card-title.red {
-            color: #dc2626;
-        }
-
-        .card-description {
-            color: #718096;
-            font-size: 0.9em;
-            margin-bottom: 12px;
+            grid-template-columns: 1fr;
         }
 
         table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        th {
-            padding: 18px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 1.1em;
-        }
-
-        td {
-            padding: 18px;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tbody tr {
-            transition: all 0.3s ease;
-        }
-
-        tbody tr:hover {
-            background-color: #f8f9fa;
-            transform: scale(1.01);
-        }
-
-        .numero {
-            font-weight: bold;
-            color: #667eea;
-            font-size: 1.1em;
-            width: 60px;
-        }
-
-        .titre-lien {
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 1.05em;
-        }
-
-        .titre-lien.red {
-            color: #dc2626;
-        }
-
-        .titre-lien.orange {
-            color: #ea580c;
-        }
-
-        .description {
-            color: #718096;
-            font-size: 0.95em;
-        }
-
-        a {
-            color: #667eea;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #764ba2;
-            text-decoration: underline;
-        }
-
-        .link-button {
-            display: inline-block;
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            width: 100%;
-            text-align: center;
-        }
-
-        .link-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-            text-decoration: none;
-        }
-
-        .link-button.red {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-        }
-
-        .link-button.red:hover {
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
-        }
-
-        .link-button.orange {
-            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
-        }
-
-        .link-button.orange:hover {
-            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.4);
-        }
-
-        footer {
-            background: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            color: #718096;
             font-size: 0.9em;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .content {
-                padding: 20px;
-            }
-
-            .trigramme-grid {
-                grid-template-columns: 1fr;
-            }
-
-            table {
-                font-size: 0.9em;
-            }
-
-            th, td {
-                padding: 12px;
-            }
+        th, td {
+            padding: 12px;
         }
-    </style>
+    }
+</style>
+```
+
 </head>
 <body>
     <div class="container">
@@ -268,112 +297,121 @@
             <p class="subtitle">Vous trouverez ici tout les quiz éxistant "Bon courage"</p>
         </header>
 
-        <div class="content">
-            <div class="section">
-                <h2 class="section-title">🔤 Ressources Trigrammes</h2>
-                <div class="trigramme-grid">
-                    <div class="trigramme-card">
-                        <div class="card-title">0-30 trigrammes</div>
-                        <div class="card-description">Collection de 0 à 30</div>
-                        <a href="https://dj383210.github.io/Tri1/" class="link-button">Accéder</a>
-                    </div>
-                    <div class="trigramme-card">
-                        <div class="card-title">30-60 trigrammes</div>
-                        <div class="card-description">Collection de 30 à 60</div>
-                        <a href="https://dj383210.github.io/Tri2/" class="link-button">Accéder</a>
-                    </div>
-                    <div class="trigramme-card">
-                        <div class="card-title">60-90 trigrammes</div>
-                        <div class="card-description">Collection de 60 à 90</div>
-                        <a href="https://dj383210.github.io/Tri3/" class="link-button">Accéder</a>
-                    </div>
-                    <div class="trigramme-card">
-                        <div class="card-title">90-119 trigrammes</div>
-                        <div class="card-description">Collection de 90 à 119</div>
-                        <a href="https://dj383210.github.io/Tri4/" class="link-button">Accéder</a>
-                    </div>
-                    <div class="trigramme-card">
-                        <div class="card-title">119-150 trigrammes</div>
-                        <div class="card-description">Collection de 119 à 150</div>
-                        <a href="https://dj383210.github.io/Tri5/" class="link-button">Accéder</a>
-                    </div>
-                    <div class="trigramme-card">
-                        <div class="card-title">0-60 trigrammes</div>
-                        <div class="card-description">Collection complète de 0 à 60</div>
-                        <a href="https://dj383210.github.io/Tri1-2/" class="link-button">Accéder</a>
-                    </div>
-                    <div class="trigramme-card hard">
-                        <div class="card-title red">0-60 trigrammes hard</div>
-                        <div class="card-description">Version difficile de 0 à 60</div>
-                        <a href="https://dj383210.github.io/Tri1-2H/" class="link-button red">Accéder</a>
-                    </div>
-                    <div class="trigramme-card">
-                        <div class="card-title">60-120 trigrammes</div>
-                        <div class="card-description">Collection complète de 60 à 120</div>
-                        <a href="https://dj383210.github.io/Tri3-4/" class="link-button">Accéder</a>
-                    </div>
-                    <div class="trigramme-card">
-                        <div class="card-title">90-150 trigrammes</div>
-                        <div class="card-description">Collection complète de 90 à 150</div>
-                        <a href="https://dj383210.github.io/Tri4-5/" class="link-button">Accéder</a>
-                    </div>
-                    <div class="trigramme-card">
-                        <div class="card-title">150 trigrammes</div>
-                        <div class="card-description">Collection complète des 150</div>
-                        <a href="https://dj383210.github.io/TriALL/" class="link-button">Accéder</a>
-                    </div>
-                    <div class="trigramme-card hard">
-                        <div class="card-title red">150 trigrammes hard</div>
-                        <div class="card-description">Version difficile des 150</div>
-                        <a href="https://dj383210.github.io/TriAllH/" class="link-button red">Accéder</a>
-                    </div>
+```
+    <div class="content">
+        <div class="section">
+            <h2 class="section-title">🔤 Ressources Trigrammes</h2>
+            <div class="trigramme-grid">
+                <div class="trigramme-card">
+                    <div class="card-title">0-30 trigrammes</div>
+                    <div class="card-description">Collection de 0 à 30</div>
+                    <a href="https://dj383210.github.io/Tri1/" class="link-button">Accéder</a>
                 </div>
-            </div>
-
-            <div class="section">
-                <h2 class="section-title">🏥 Ressources Médicales</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>N°</th>
-                            <th>Titre</th>
-                            <th>Description</th>
-                            <th>Lien</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="numero">12</td>
-                            <td class="titre-lien">Paramètres Vitaux</td>
-                            <td class="description">Guide et quiz sur les paramètres vitaux</td>
-                            <td><a href="https://dj383210.github.io/Quiz-PV/" class="link-button">Accéder</a></td>
-                        </tr>
-                        <tr>
-                            <td class="numero">13</td>
-                            <td class="titre-lien">Anatomie Générale</td>
-                            <td class="description">Ressources complètes sur l'anatomie générale</td>
-                            <td><a href="https://dj383210.github.io/Quiz-anatomie/" class="link-button">Accéder</a></td>
-                        </tr>
-                        <tr>
-                            <td class="numero">14</td>
-                            <td class="titre-lien">Schéma artère</td>
-                            <td class="description">Schémas et quiz sur les artères</td>
-                            <td><a href="https://dj383210.github.io/Arte/" class="link-button">Accéder</a></td>
-                        </tr>
-                        <tr>
-                            <td class="numero">15</td>
-                            <td class="titre-lien orange">Quiz schémas</td>
-                            <td class="description">Quiz sur les différents schémas médicaux</td>
-                            <td><a href="https://dj383210.github.io/Quiz-schemas/" class="link-button orange">Accéder</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="trigramme-card">
+                    <div class="card-title">30-60 trigrammes</div>
+                    <div class="card-description">Collection de 30 à 60</div>
+                    <a href="https://dj383210.github.io/Tri2/" class="link-button">Accéder</a>
+                </div>
+                <div class="trigramme-card">
+                    <div class="card-title">60-90 trigrammes</div>
+                    <div class="card-description">Collection de 60 à 90</div>
+                    <a href="https://dj383210.github.io/Tri3/" class="link-button">Accéder</a>
+                </div>
+                <div class="trigramme-card">
+                    <div class="card-title">90-119 trigrammes</div>
+                    <div class="card-description">Collection de 90 à 119</div>
+                    <a href="https://dj383210.github.io/Tri4/" class="link-button">Accéder</a>
+                </div>
+                <div class="trigramme-card">
+                    <div class="card-title">119-150 trigrammes</div>
+                    <div class="card-description">Collection de 119 à 150</div>
+                    <a href="https://dj383210.github.io/Tri5/" class="link-button">Accéder</a>
+                </div>
+                <div class="trigramme-card">
+                    <div class="card-title">0-60 trigrammes</div>
+                    <div class="card-description">Collection complète de 0 à 60</div>
+                    <a href="https://dj383210.github.io/Tri1-2/" class="link-button">Accéder</a>
+                </div>
+                <div class="trigramme-card hard">
+                    <div class="card-title red">0-60 trigrammes hard</div>
+                    <div class="card-description">Version difficile de 0 à 60</div>
+                    <a href="https://dj383210.github.io/Tri1-2H/" class="link-button red">Accéder</a>
+                </div>
+                <div class="trigramme-card">
+                    <div class="card-title">60-120 trigrammes</div>
+                    <div class="card-description">Collection complète de 60 à 120</div>
+                    <a href="https://dj383210.github.io/Tri3-4/" class="link-button">Accéder</a>
+                </div>
+                <div class="trigramme-card">
+                    <div class="card-title">90-150 trigrammes</div>
+                    <div class="card-description">Collection complète de 90 à 150</div>
+                    <a href="https://dj383210.github.io/Tri4-5/" class="link-button">Accéder</a>
+                </div>
+                <div class="trigramme-card">
+                    <div class="card-title">150 trigrammes</div>
+                    <div class="card-description">Collection complète des 150</div>
+                    <a href="https://dj383210.github.io/TriALL/" class="link-button">Accéder</a>
+                </div>
+                <div class="trigramme-card hard">
+                    <div class="card-title red">150 trigrammes hard</div>
+                    <div class="card-description">Version difficile des 150</div>
+                    <a href="https://dj383210.github.io/TriAllH/" class="link-button red">Accéder</a>
+                </div>
             </div>
         </div>
 
-        <footer>
-            <p>© 2025 - Index des ressources hébergées sur GitHub Pages</p>
-        </footer>
+        <div class="section">
+            <h2 class="section-title">🏥 Ressources Médicales</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Lien</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="numero">12</td>
+                        <td class="titre-lien">Paramètres Vitaux</td>
+                        <td class="description">Guide et quiz sur les paramètres vitaux</td>
+                        <td><a href="https://dj383210.github.io/Quiz-PV/" class="link-button">Accéder</a></td>
+                    </tr>
+                    <tr>
+                        <td class="numero">13</td>
+                        <td class="titre-lien">Anatomie Générale</td>
+                        <td class="description">Ressources complètes sur l'anatomie générale</td>
+                        <td><a href="https://dj383210.github.io/Quiz-anatomie/" class="link-button">Accéder</a></td>
+                    </tr>
+                    <tr>
+                        <td class="numero">14</td>
+                        <td class="titre-lien">Schéma artère</td>
+                        <td class="description">Schémas et quiz sur les artères</td>
+                        <td><a href="https://dj383210.github.io/Arte/" class="link-button">Accéder</a></td>
+                    </tr>
+                    <tr>
+                        <td class="numero">15</td>
+                        <td class="titre-lien orange">Quiz schémas</td>
+                        <td class="description">Quiz sur les différents schémas médicaux</td>
+                        <td><a href="https://dj383210.github.io/Quiz-schemas/" class="link-button orange">Accéder</a></td>
+                    </tr>
+                    <tr>
+                        <td class="numero">16</td>
+                        <td class="titre-lien pink">Quiz pédiatrie</td>
+                        <td class="description">Quiz sur la pédiatrie</td>
+                        <td><a href="https://dj383210.github.io/Quiz-ped/" class="link-button pink">Accéder</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <footer>
+        <p>© 2025 - Index des ressources hébergées sur GitHub Pages</p>
+    </footer>
+</div>
+```
+
 </body>
 </html>
