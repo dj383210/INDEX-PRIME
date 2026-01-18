@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARM - Plateforme d'Apprentissage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #004c99;
+            --secondary: #00b8a9;
+            --accent: #ff6b6b;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #28a745;
+            --warning: #ffc107;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f0f23;
+            min-height: 100vh;
+            color: var(--dark);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 184, 169, 0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px);
+            z-index: 0;
+        }
+
+        .hero, .main-container, footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h60v60H0z" fill="none"/><path d="M30 0v60M0 30h60" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-pills {
+            display: flex;
+            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            flex: 1;
+            min-width: 140px;
+            padding: 15px 25px;
+            background: var(--light);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            text-align: center;
+            color: var(--gray);
+            position: relative;
+        }
+
+        .nav-pill:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .nav-pill.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.3);
+        }
+
+        .nav-pill .icon {
+            font-size: 1.5em;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-header h2 {
+            font-size: 2em;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1em;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        /* Couleurs spécifiques par type de carte */
+        .quiz-card.color-blue {
+            background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+            border-color: #2196f3;
+        }
+
+        .quiz-card.color-blue::before {
+            background: linear-gradient(90deg, #2196f3, #1976d2);
+        }
+
+        .quiz-card.color-green {
+            background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%);
+            border-color: #4caf50;
+        }
+
+        .quiz-card.color-green::before {
+            background: linear-gradient(90deg, #4caf50, #388e3c);
+        }
+
+        .quiz-card.color-purple {
+            background: linear-gradient(135deg, #f3e5f5 0%, #ffffff 100%);
+            border-color: #9c27b0;
+        }
+
+        .quiz-card.color-purple::before {
+            background: linear-gradient(90deg, #9c27b0, #7b1fa2);
+        }
+
+        .quiz-card.color-orange {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffffff 100%);
+            border-color: #ff9800;
+        }
+
+        .quiz-card.color-orange::before {
+            background: linear-gradient(90deg, #ff9800, #f57c00);
+        }
+
+        .quiz-card.color-red {
+            background: linear-gradient(135deg, #ffebee 0%, #ffffff 100%);
+            border-color: #f44336;
+        }
+
+        .quiz-card.color-red::before {
+            background: linear-gradient(90deg, #f44336, #d32f2f);
+        }
+
+        .quiz-card.color-teal {
+            background: linear-gradient(135deg, #e0f2f1 0%, #ffffff 100%);
+            border-color: #009688;
+        }
+
+        .quiz-card.color-teal::before {
+            background: linear-gradient(90deg, #009688, #00796b);
+        }
+
+        .quiz-card.color-cyan {
+            background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+            border-color: #00bcd4;
+        }
+
+        .quiz-card.color-cyan::before {
+            background: linear-gradient(90deg, #00bcd4, #0097a7);
+        }
+
+        .quiz-card.color-pink {
+            background: linear-gradient(135deg, #fce4ec 0%, #ffffff 100%);
+            border-color: #e91e63;
+        }
+
+        .quiz-card.color-pink::before {
+            background: linear-gradient(90deg, #e91e63, #c2185b);
+        }
+
+        .quiz-card.color-indigo {
+            background: linear-gradient(135deg, #e8eaf6 0%, #ffffff 100%);
+            border-color: #3f51b5;
+        }
+
+        .quiz-card.color-indigo::before {
+            background: linear-gradient(90deg, #3f51b5, #303f9f);
+        }
+
+        .quiz-card.color-lime {
+            background: linear-gradient(135deg, #f9fbe7 0%, #ffffff 100%);
+            border-color: #cddc39;
+        }
+
+        .quiz-card.color-lime::before {
+            background: linear-gradient(90deg, #cddc39, #afb42b);
+        }
+
+        .quiz-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .quiz-card.featured {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .quiz-card.featured .card-title,
+        .quiz-card.featured .card-description {
+            color: white;
+        }
+
+        .quiz-card.featured::before {
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .difficulty-easy {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .difficulty-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .difficulty-hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .difficulty-exam {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .card-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 0.85em;
+            color: var(--gray);
+        }
+
+        .card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-featured {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: var(--dark);
+        }
+
+        .btn-featured:hover {
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .category-divider {
+            margin: 50px 0 30px;
+            padding: 20px 0;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .category-divider h3 {
+            font-size: 1.5em;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stats-banner {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        footer {
+            background: rgba(26, 26, 46, 0.95);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .nav-pills {
+                flex-direction: column;
+            }
+
+            .nav-pill {
+                min-width: 100%;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-banner {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+   <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+
+    <img src="https://i.ibb.co/H6RCx6x/Gemini-Generated-Image-xnavy4xnavy4xnav-removebg-preview.png" 
+         alt="Logo CFARM" 
+         style="
+            width: 40%; 
+            min-width: 150px; 
+            max-width: 300px; 
+            height: auto; 
+            margin-top: -14vh;    /* Réduit la distance avec le haut du site */
+            margin-bottom: -10vh; /* Garde le logo proche de la barre */
+         ">
+        </div>
+
+    
+
+</div>
+	
+        
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="stats-banner" style="visibility: hidden; height: 0; margin: 0; padding: 0; overflow: hidden;">
+            <div class="stat-item">
+            </div>
+            
+        </div>
+
+        <nav class="nav-pills">
+            <button class="nav-pill active" onclick="showSection('trigrammes')">
+                <span class="icon">📝</span>
+                Trigrammes
+            </button>
+            <button class="nav-pill" onclick="showSection('medical')">
+                <span class="icon">🏥</span>
+                Médical
+            </button>
+            <button class="nav-pill" onclick="showSection('anglais')">
+                <span class="icon">🇬🇧</span>
+                Anglais
+            </button>
+            <button class="nav-pill" onclick="showSection('communication')">
+                <span class="icon">📡</span>
+                Communication
+            </button>
+            <button class="nav-pill" onclick="showSection('examens')">
+                <span class="icon">🎓</span>
+                Examens
+            </button>
+        </nav>
+
+        <!-- Section Trigrammes -->
+        <div id="trigrammes" class="content-section active">
+            <div class="section-header">
+                <h2>📝 Trigrammes</h2>
+                <p>Maîtrisez les 150 trigrammes essentiels pour votre formation ARM</p>
+            </div>
+
+            <div class="category-divider">
+                <h3>🎯 Apprentissage progressif</h3>
+            </div>
+            <div class="card-grid">
+                <div class="quiz-card color-blue">
+                    <span class="difficulty-badge difficulty-easy">Débutant</span>
+                    <h3 class="card-title">0-30 trigrammes</h3>
+                    <div class="card-meta">
+                        <span>📚 30 items</span>
+                    </div>
+                    <p class="card-description">Premiers pas avec les trigrammes fondamentaux</p>
+                    <a href="https://dj383210.github.io/Tri1/" class="btn">Commencer</a>
+                </div>
+
+                <div class="quiz-card color-green">
+                    <span class="difficulty-badge difficulty-easy">Débutant</span>
+                    <h3 class="card-title">30-60 trigrammes</h3>
+                    <div class="card-meta">
+                        <span>📚 30 items</span>
+                    </div>
+                    <p class="card-description">Continuez votre progression</p>
+                    <a href="https://dj383210.github.io/Tri2/" class="btn">Commencer</a>
+                </div>
+
+                <div class="quiz-card color-purple">
+                    <span class="difficulty-badge difficulty-medium">Intermédiaire</span>
+                    <h3 class="card-title">60-90 trigrammes</h3>
+                    <div class="card-meta">
+                        <span>📚 30 items</span>
+                    </div>
+                    <p class="card-description">Montez en compétence</p>
+                    <a href="https://dj383210.github.io/Tri3/" class="btn">Commencer</a>
+                </div>
+
+                <div class="quiz-card color-orange">
+                    <span class="difficulty-badge difficulty-medium">Intermédiaire</span>
+                    <h3 class="card-title">90-119 trigrammes</h3>
+                    <div class="card-meta">
+                        <span>📚 29 items</span>
+                    </div>
+                    <p class="card-description">Perfectionnez vos connaissances</p>
+                    <a href="https://dj383210.github.io/Tri4/" class="btn">Commencer</a>
+                </div>
+
+                <div class="quiz-card color-teal">
+                    <span class="difficulty-badge difficulty-medium">Intermédiaire</span>
+                    <h3 class="card-title">119-150 trigrammes</h3>
+                    <div class="card-meta">
+                        <span>📚 31 items</span>
+                    </div>
+                    <p class="card-description">Dernière ligne droite</p>
+                    <a href="https://dj383210.github.io/Tri5/" class="btn">Commencer</a>
+                </div>
+            </div>
+
+            <div class="category-divider">
+                <h3>🔥 Collections complètes</h3>
+            </div>
+            <div class="card-grid">
+                <div class="quiz-card color-cyan">
+                    <span class="difficulty-badge difficulty-medium">60 items</span>
+                    <h3 class="card-title">0-60 trigrammes</h3>
+                    <p class="card-description">Collection complète du premier cycle</p>
+                    <a href="https://dj383210.github.io/Tri1-2/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-indigo">
+                    <span class="difficulty-badge difficulty-medium">60 items</span>
+                    <h3 class="card-title">60-120 trigrammes</h3>
+                    <p class="card-description">Collection complète du deuxième cycle</p>
+                    <a href="https://dj383210.github.io/Tri3-4/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-pink">
+                    <span class="difficulty-badge difficulty-medium">60 items</span>
+                    <h3 class="card-title">90-150 trigrammes</h3>
+                    <p class="card-description">Collection avancée</p>
+                    <a href="https://dj383210.github.io/Tri4-5/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card featured">
+                    <span class="difficulty-badge" style="background: rgba(255,255,255,0.3); color: white;">Collection complète</span>
+                    <h3 class="card-title">150 trigrammes</h3>
+                    <div class="card-meta" style="color: rgba(255,255,255,0.9);">
+                        <span>⭐ Complet</span>
+                        <span>📚 150 items</span>
+                    </div>
+                    <p class="card-description">Tous les trigrammes en un seul quiz</p>
+                    <a href="https://dj383210.github.io/TriALL/" class="btn btn-featured">Accéder</a>
+                </div>
+            </div>
+
+            <div class="category-divider">
+                <h3>💀 Mode difficile</h3>
+            </div>
+            <div class="card-grid">
+                <div class="quiz-card color-red">
+                    <span class="difficulty-badge difficulty-hard">Difficile</span>
+                    <h3 class="card-title">0-60 trigrammes HARD</h3>
+                    <p class="card-description">Version hardcore pour experts</p>
+                    <a href="https://dj383210.github.io/Tri1-2H/" class="btn">Relever le défi</a>
+                </div>
+
+                <div class="quiz-card color-red">
+                    <span class="difficulty-badge difficulty-hard">Difficile</span>
+                    <h3 class="card-title">60-90 trigrammes HARD</h3>
+                    <p class="card-description">Testez vos limites</p>
+                    <a href="https://dj383210.github.io/Tri3H/" class="btn">Relever le défi</a>
+                </div>
+
+                <div class="quiz-card color-red">
+                    <span class="difficulty-badge difficulty-hard">Difficile</span>
+                    <h3 class="card-title">90-120 trigrammes HARD</h3>
+                    <p class="card-description">Niveau expert exigé</p>
+                    <a href="https://dj383210.github.io/Tri4H/" class="btn">Relever le défi</a>
+                </div>
+
+                <div class="quiz-card color-red">
+                    <span class="difficulty-badge difficulty-hard">Difficile</span>
+                    <h3 class="card-title">150 trigrammes HARD</h3>
+                    <p class="card-description">Le défi ultime</p>
+                    <a href="https://dj383210.github.io/TriAllH/" class="btn">Relever le défi</a>
+                </div>
+
+                <div class="quiz-card color-orange">
+                    <span class="difficulty-badge difficulty-hard">Spécialisé</span>
+                    <h3 class="card-title">Caserne</h3>
+                    <p class="card-description">Trigrammes spécifiques caserne</p>
+                    <a href="https://dj383210.github.io/TRI-CASERNE/" class="btn">Accéder</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Médical -->
+        <div id="medical" class="content-section">
+            <div class="section-header">
+                <h2>🏥 Ressources Médicales</h2>
+                <p>Anatomie, pathologies et procédures essentielles pour l'ARM</p>
+            </div>
+
+            <div class="card-grid">
+                <div class="quiz-card color-blue">
+                    <span class="difficulty-badge difficulty-easy">Fondamental</span>
+                    <h3 class="card-title">Paramètres Vitaux</h3>
+                    <p class="card-description">Maîtrisez les constantes vitales et leur interprétation</p>
+                    <a href="https://dj383210.github.io/Quiz-PV/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-purple">
+                    <span class="difficulty-badge difficulty-medium">Anatomie</span>
+                    <h3 class="card-title">Anatomie Générale</h3>
+                    <p class="card-description">Ressources complètes sur l'anatomie humaine</p>
+                    <a href="https://dj383210.github.io/Quiz-anatomie/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-red">
+                    <span class="difficulty-badge difficulty-medium">Anatomie</span>
+                    <h3 class="card-title">Schéma artères</h3>
+                    <p class="card-description">Système artériel et circulation sanguine</p>
+                    <a href="https://dj383210.github.io/Arte/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-orange">
+                    <span class="difficulty-badge difficulty-medium">Visuel</span>
+                    <h3 class="card-title">Quiz schémas</h3>
+                    <p class="card-description">Testez-vous sur les schémas médicaux</p>
+                    <a href="https://dj383210.github.io/Quiz-schemas/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-pink">
+                    <span class="difficulty-badge difficulty-medium">Spécialisé</span>
+                    <h3 class="card-title">Pédiatrie</h3>
+                    <p class="card-description">Spécificités de la régulation pédiatrique</p>
+                    <a href="https://dj383210.github.io/Quiz-ped/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-teal">
+                    <span class="difficulty-badge difficulty-hard">Pratique</span>
+                    <h3 class="card-title">Quiz ambulance</h3>
+                    <p class="card-description">Équipements et procédures ambulancières</p>
+                    <a href="https://dj383210.github.io/Quiz-Ambu/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-cyan">
+                    <span class="difficulty-badge difficulty-easy">Acronymes</span>
+                    <h3 class="card-title">Test acronymes</h3>
+                    <p class="card-description">Décryptez le jargon médical</p>
+                    <a href="https://dj383210.github.io/TEST_AB/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-indigo">
+                    <span class="difficulty-badge difficulty-medium">Procédures</span>
+                    <h3 class="card-title">Quiz fiches</h3>
+                    <p class="card-description">Protocoles et fiches de régulation</p>
+                    <a href="https://dj383210.github.io/Quiz-Fiche/" class="btn">Accéder</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Anglais -->
+        <div id="anglais" class="content-section">
+            <div class="section-header">
+                <h2>🇬🇧 Ressources Anglais</h2>
+                <p>Anglais médical et communication en urgence</p>
+            </div>
+
+            <div class="card-grid">
+                <div class="quiz-card color-green">
+                    <span class="difficulty-badge difficulty-medium">Compréhension</span>
+                    <h3 class="card-title">Anglais - Textes</h3>
+                    <p class="card-description">Exercices de compréhension écrite médicale</p>
+                    <a href="https://dj383210.github.io/Anglais-text/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-teal">
+                    <span class="difficulty-badge difficulty-easy">Vocabulaire</span>
+                    <h3 class="card-title">Quiz vocabulaire</h3>
+                    <p class="card-description">Termes médicaux essentiels en anglais</p>
+                    <a href="https://dj383210.github.io/Anglais-voc/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-blue">
+                    <span class="difficulty-badge difficulty-medium">Oral</span>
+                    <h3 class="card-title">Anglais prononciation</h3>
+                    <p class="card-description">Entraînement à la communication orale</p>
+                    <a href="https://dj383210.github.io/Anglais-test-oral/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card color-indigo">
+                    <span class="difficulty-badge difficulty-exam">Examen</span>
+                    <h3 class="card-title">Texte Examen</h3>
+                    <p class="card-description">Préparation aux épreuves écrites</p>
+                    <a href="https://dj383210.github.io/Textes_eval/" class="btn">Accéder</a>
+                </div>
+
+                <div class="quiz-card featured">
+                    <span class="difficulty-badge" style="background: rgba(255,255,255,0.3); color: white;">⭐ Complet</span>
+                    <h3 class="card-title">ANGLAIS FULL</h3>
+                    <div class="card-meta" style="color: rgba(255,255,255,0.9);">
+                        <span>🎯 Toutes ressources</span>
+                    </div>
+                    <p class="card-description">Collection complète de toutes les ressources anglais</p>
+                    <a href="https://dj383210.github.io/ANGLAIS-FULL/" class="btn btn-featured">Accéder</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Communication -->
+        <div id="communication" class="content-section">
+            <div class="section-header">
+                <h2>📡 Communication</h2>
+                <p>Techniques de communication et gestion des appels d'urgence</p>
+            </div>
+
+            <div class="card-grid">
+                <div class="quiz-card color-lime">
+                    <span class="difficulty-badge difficulty-medium">Pratique</span>
+                    <h3 class="card-title">Test Communication</h3>
+                    <p class="card-description">Évaluez vos compétences en communication d'urgence</p>
+                    <a href="https://dj383210.github.io/Test-Yohan/" class="btn">Accéder</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Examens -->
+        <div id="examens" class="content-section">
+            <div class="section-header">
+                <h2>🎓 Examens</h2>
+                <p>Évaluations et examens blancs pour valider vos connaissances</p>
+            </div>
+
+            <div class="card-grid">
+                <div class="quiz-card color-green">
+                    <span class="difficulty-badge difficulty-exam">Examen 1B</span>
+                    <h3 class="card-title">EX1B</h3>
+                    <div class="card-meta">
+                        <span>⏱️ Évaluation</span>
+                        <span>📋 Complet</span>
+                    </div>
+                    <p class="card-description">Premier examen de validation des connaissances</p>
+                    <a href="https://dj383210.github.io/Exam1B/" class="btn">Passer l'examen</a>
+                </div>
+
+                <div class="quiz-card color-purple">
+                    <span class="difficulty-badge difficulty-exam">Examen 2A</span>
+                    <h3 class="card-title">EXAM2A</h3>
+                    <div class="card-meta">
+                        <span>⏱️ Évaluation</span>
+                        <span>📋 Complet</span>
+                    </div>
+                    <p class="card-description">Deuxième examen - Partie A</p>
+                    <a href="https://dj383210.github.io/EXAM2A/" class="btn">Passer l'examen</a>
+                </div>
+
+                <div class="quiz-card color-orange">
+                    <span class="difficulty-badge difficulty-exam">Examen 2B</span>
+                    <h3 class="card-title">EXAM2B</h3>
+                    <div class="card-meta">
+                        <span>⏱️ Évaluation</span>
+                        <span>📋 Complet</span>
+                    </div>
+                    <p class="card-description">Deuxième examen - Partie B</p>
+                    <a href="https://dj383210.github.io/EXAM2B/" class="btn">Passer l'examen</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 - ARM • Formation Assistant de Régulation Médicale</p>
+        <p style="margin-top: 10px; opacity: 0.6;"></p>
+    </footer>
+
+    <script>
+        function showSection(sectionName) {
+            // Masquer toutes les sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Désactiver tous les boutons
+            const buttons = document.querySelectorAll('.nav-pill');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Activer la section demandée
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Activer le bouton correspondant
+            event.target.closest('.nav-pill').classList.add('active');
+        }
+    </script>
+</body>
+</html>
